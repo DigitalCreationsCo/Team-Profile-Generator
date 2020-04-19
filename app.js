@@ -9,6 +9,63 @@ const OUTPUT_DIR = path.resolve(__dirname, "output")
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 ​
 const render = require("./lib/htmlRenderer");
+
+
+const questions = [
+    {
+        type: "input",
+        name: "name",
+        message: "Please enter employee name:"
+    },
+    {
+        type: "input",
+        name: "id",
+        message: "Please enter employee ID number:"
+    },
+    {
+        type: "input",
+        name: "email",
+        message: "Please enter employee e-mail address:"
+    },
+    {
+        type: "list",
+        name: "role",
+        message: "What is the employee's role in the team?",
+        choices: [{
+            name: "Manager"
+        },
+        {
+            name: "Engineer"
+        },
+        {
+            name: "Intern"
+        }]
+    },
+    {
+        type: "input",
+        name: "officeNumber",
+        message: "Please enter manager's office number:",
+        when: function(answers){
+            return answers.role === "Manager";
+        }
+    },
+    {
+        type: "input",
+        name: "github",
+        message: "Please enter engineer's github username:",
+        when: function(answers){
+            return answers.role === "Engineer";
+        }
+    },
+    {
+        type: "input",
+        name: "school",
+        message: "What is the name of the school you're currently attending?",
+        when: function(answers){
+            return answers.role === "Intern";
+        }
+    }
+];
 ​
 ​
 // Write code to use inquirer to gather information about the development team members,
