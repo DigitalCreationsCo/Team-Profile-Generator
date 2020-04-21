@@ -10,7 +10,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 ​
 const render = require("./lib/htmlRenderer");
 
-const employeeList = [];
+const employees = [];
 
 
 const questions = [
@@ -74,15 +74,15 @@ function promptUser() {
     inquirer.prompt(questions).then(function(response) {
         if (response.role === "Manager") {
             const currentManager = new Manager(response.name, response.id, response.email, response.officeNumber);
-            employeeList.push(currentManager);
+            employees.push(currentManager);
         }
         else if (response.role === "Engineer") {
             const currentEngineer = new Engineer(response.name, response.id, response.email, response.github);
-            employeeList.push(currentEngineer);
+            employees.push(currentEngineer);
         }
         else if (response.role === "Intern") {
             const currentIntern = new Intern(response.name, response.id, response.email, response.school);
-            employeeList.push(currentIntern);
+            employees.push(currentIntern);
         }
         currentEmployee();
     });
@@ -101,7 +101,7 @@ function promptUser() {
             promptUser();
         }
         else {
-            const html = render(employeeList);
+            const html = render(employees);
             fs.writeFile(outputPath, html, function(err) {
                 if (err) throw err;
             })
