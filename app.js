@@ -4,10 +4,10 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
-​
+
 const OUTPUT_DIR = path.resolve(__dirname, "output")
 const outputPath = path.join(OUTPUT_DIR, "team.html");
-​
+
 const render = require("./lib/htmlRenderer");
 
 const employees = [];
@@ -47,7 +47,7 @@ const questions = [
         type: "input",
         name: "officeNumber",
         message: "Please enter manager's office number:",
-        when: function(answers){
+        when: function (answers) {
             return answers.role === "Manager";
         }
     },
@@ -55,7 +55,7 @@ const questions = [
         type: "input",
         name: "github",
         message: "Please enter engineer's github username:",
-        when: function(answers){
+        when: function (answers) {
             return answers.role === "Engineer";
         }
     },
@@ -63,15 +63,15 @@ const questions = [
         type: "input",
         name: "school",
         message: "What is the name of the school you're currently attending?",
-        when: function(answers){
+        when: function (answers) {
             return answers.role === "Intern";
         }
     }
 ];
-​
+
 function promptUser() {
 
-    inquirer.prompt(questions).then(function(response) {
+    inquirer.prompt(questions).then(function (response) {
         if (response.role === "Manager") {
             const currentManager = new Manager(response.name, response.id, response.email, response.officeNumber);
             employees.push(currentManager);
@@ -86,29 +86,36 @@ function promptUser() {
         }
         currentEmployee();
     });
- };
+};
 
- function currentEmployee() {
+function currentEmployee() {
     inquirer.prompt([
         {
-            type:"confirm",
-            name:"currentEmployee",
-            message:"Would you like to enter another employee?",
-            default:true
+            type: "confirm",
+            name: "currentEmployee",
+            message: "Would you like to enter another employee?",
+            default: true
         }
-    ]).then(function(answers) {
+    ]).then(function (answers) {
         if (answers.currentEmployee) {
             promptUser();
         }
         else {
-            const html = render(employees);
-            fs.writeFile(outputPath, html, function(err) {
+            const data = render(employees);
+            fs.writeFile(outputPath, data, function (err) {
                 if (err) throw err;
             })
         }
     })
 }
 
-promptUser();
-​
+function init() {
+
+    promptUser();
+
+}
+
+init();
+
+
 
