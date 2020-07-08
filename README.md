@@ -1,4 +1,7 @@
-## Template Engine - Employee Summary
+# Template Engine - Employee Summary
+
+
+## Description
 
 A Node CLI (command line interface) that takes employee information and generates an HTML summary page
 
