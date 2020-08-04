@@ -29,5 +29,6 @@ Breaking down the requirements, I separated out the objective into the following
 ### Technologies Used
 - JavaScript
 - Node.js
+- Jest(Testing)
 
 
