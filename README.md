@@ -23,7 +23,7 @@ Breaking down the requirements, I separated out the objective into the following
 
 ### Installation
 - Clone Repository
-- Run "npm install" to install dependencies that will enable app to run on your local machine
+- Run npm install on the command line to install dependencies that will enable app to run on your local machine
 
 
 ### Technologies Used
